@@ -6,22 +6,22 @@ use Illuminate\Http\Request;
 
 class ApiUsuarioController extends Controller
 {
-        public function FetchAll() {
-        // logic to get all forms 
+      public function fetchAll() {
+      // logic to get all users
       }
   
-         public function createUser(Request $request) {
+      public function createUser(Request $request) {
         // logic to create an user
-            $usuario = new Usuario;
-            $usuario->nome = $request->nome;
-            $usuario->cpf = $request->cpf;
-            $usuario->data_nascimento = $request->data_nascimento;
-            $usuario->email = $request->email;
-            $usuario->telefone = $request->telefone;
-            $usuario->logradouro = $request->logradouro;
-            $usuario->cidade = $request->cidade;
-            $usuario->estado = $request->estado;
-            $usuario->save();
+            $user = new user;
+            $user->name = $request->name;
+            $user->cpf = $request->cpf;
+            $user->date_birth = $request->date_birth;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->city = $request->city;
+            $user->state = $request->state;
+            $user->save();
 
 
             return response()->json([

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+}); 
 
-Route::get('usuarios', 'ApiUsuarioController@FetchAll');
-Route::get('usuarios/{id}', 'ApiUsuarioController@getUser');
-Route::post('usuarios', 'ApiUsuarioController@createUser');
-Route::put('usuarios/{id}', 'ApiUsuarioController@updateUser');
-Route::delete('usuarios/{id}','ApiUsuarioController@deleteUser');
+
+Route::get('/users',[UserController::class, 'fetchAll']); // Buscar todos usuarios
+Route::get('/users/{id}', [UserController::class, 'getUser']); // Buscar um usuario pelo ID
+Route::post('/users', [UserController::class, 'createUser']); // Criar um usuario
+Route::put('/users/{id}', [UserController::class, 'updateUser']); // Editar um usuario
+Route::delete('/users/{id}', [UserController::class, 'deleteUser']); // Deletar Usuario
