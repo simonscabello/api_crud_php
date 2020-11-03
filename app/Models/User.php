@@ -12,7 +12,8 @@ class User extends Model
 
     protected $table = 'users'; // Faz associação do model User com a tabela users do db
 
-    protected $fillable = [
+    protected $fillable = 
+    [
         'name', 
         'cpf', 
         'date_birth', 

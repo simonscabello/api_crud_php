@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
+use App\Http\Requests\StoreUser;
 
 class UserController extends Controller
 {
@@ -12,16 +15,24 @@ class UserController extends Controller
     {
         $all_users = User::all();
 
-        return response()->json(['users' => $all_users], 200);
+        return response()->json(['all_users' => $all_users], 200);
     }
 
 
     // Função para criar usuarios.
-    public function createUser(Request $request) 
+    public function createUser(StoreUser $request) 
     {
-        $new_user = User::create($request->all());
+        $validated = $request->validated();
 
-        return response()->json(['user' => $new_user], 201);
+        // Mostrando os erros que foram gerados
+        /*if ($validated->fails()) {
+            $errors = $validatedData->errors();
+            
+            return response()->json(['errors' => $errors], 500); 
+        }*/
+
+        $new_user = User::create($request->all());
+        return response()->json(['created_user' => $new_user], 201);
 
     }
 
@@ -29,17 +40,17 @@ class UserController extends Controller
     // Buscar usuario por ID
     public function getUser(User $id) 
     {
-        return response()->json(['users' => $id], 200);
+        return response()->json(['id_user' => $id], 200);
     }
 
 
     // Editar atributos do usuario
     public function updateUser(Request $request, $id)
     {   
-        $user = User::findOrFail($id); // Buscando o ID cadastrado
-        $user->update($request->all());
+        $updated_user = User::findOrFail($id); // Buscando o ID cadastrado
+        $updated_user->update($request->all());
         
-        return response()->json(['user'=> $user], 200);
+        return response()->json(['updated_user'=> $updated_user], 200);
     } 
         
     
@@ -47,9 +58,8 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         $user = User::findOrFail($id);
-
         $user->delete();
 
-        return response()->json(['mensagem'=> 'Usuario deletado com sucesso.'], 200);
+        return response()->json(['message'=> 'Usuario deletado com sucesso.'], 200);
     }
 }
