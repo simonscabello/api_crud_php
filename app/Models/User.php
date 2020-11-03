@@ -16,7 +16,7 @@ class User extends Model
     [
         'name', 
         'cpf', 
-        'date_birth', 
+        'birth_date', 
         'email', 
         'phone', 
         'address', 
