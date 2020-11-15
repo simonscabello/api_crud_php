@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-
 // Classe para validação dos dados. Está sendo usada na funçao createUser() e na updateUser().
 
 class StoreUserRequest extends FormRequest
