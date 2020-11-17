@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -48,6 +49,18 @@ class UserController extends Controller
     {
         return response()->json(['user' => $id], 200);
     }*/
+
+    // Função para buscar usuários pelo CPF
+    public function getUserByCpf($cpf)
+    {
+        $get_user_cpf = DB::table('users')->where('cpf', $cpf)->first(); // Pegando o cpf no banco
+    
+        if(is_null($get_user_cpf)) {
+            return response()->json(['message' => 'Usuário não encontrado.']); // Verificando se o CPF está cadastrado 
+        }
+
+        return response()->json(['user' => $get_user_cpf]);
+    }
 
     // Função para editar os atributos do usuário
     public function updateUser(StoreUserRequest $request, $id)
