@@ -7,14 +7,13 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\DB;
 
-
 class UserController extends Controller
 {
     // Função para listar todos os usuários.
     public function fetchAll() 
     {
         $all_users = User::all();
-
+        
         return response()->json(['user' => $all_users], 200);
     }
 
@@ -24,16 +23,18 @@ class UserController extends Controller
         $validated_cpf = $this->validateCpf($request->cpf);
 
         if (!$validated_cpf) {
-            return response()->json(['message' => 'CPF inválido.'], 406);
+             echo "<script>alert('CPF inválido!');</script>";
         }
         
         $new_user = User::create($request->all());
+        echo "<script>alert('Usuário criado com sucesso');</script>";
+        //return response()->json(['user' => $new_user], 201);
 
-        return response()->json(['user' => $new_user], 201);
+        return view('layouts/form');
     }
 
     // Função para buscar usuários pelo ID - 1
-    public function getUser($id) 
+    public function getUserById($id) 
     {
         $get_user = User::find($id);
         

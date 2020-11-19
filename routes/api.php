@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/users',[UserController::class, 'fetchAll']); // Buscar todos usuarios
-Route::get('/users/{id}', [UserController::class, 'getUser']); // Buscar um usuario pelo ID
+Route::get('/users/{id}', [UserController::class, 'getUserById']); // Buscar um usuario pelo ID
 Route::get('/users-cpf/{cpf}', [UserController::class, 'getUserByCpf']); // Buscar um usuario pelo cpf
 Route::post('/users', [UserController::class, 'createUser']); // Criar um usuario
 Route::put('/users/{id}', [UserController::class, 'updateUser']); // Editar um usuario

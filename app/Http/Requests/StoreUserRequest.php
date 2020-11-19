@@ -39,7 +39,7 @@ class StoreUserRequest extends FormRequest
             'phone' => 'required|numeric|digits_between:8,30',
             'address' => 'required|max:200',
             'city' => 'required|max:50',
-            'state' => 'required|between:2,2',
+            'state' => 'required', // |between:2,2
         ];
     }
 
