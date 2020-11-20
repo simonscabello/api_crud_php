@@ -27,7 +27,7 @@
             border-radius: 10px;
             background-color: white;
             margin-top: 15px;
-            box-shadow: 1px 2px 10px #ffffff;
+            box-shadow: 1px 2px 5px black;
         }
 
         header {
@@ -40,15 +40,28 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        .btn {
+        .btn-primary {
             display: flex;
             margin-left: calc(100% - 93px);
             margin-top: 30px;
         }
+
+
+        ul {
+            list-style-type: none;
+        }
+
+        .alert {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
     </style>
 </head>
 
 <body>
+        @yield('read')
     <div class="container">
         @yield('header')
         @yield('formulario')

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+Use App\Rules\ValidateCpf;
 
 // Classe para validação dos dados. Está sendo usada na funçao createUser() e na updateUser().
 
@@ -33,13 +34,14 @@ class StoreUserRequest extends FormRequest
         return 
         [
             'name' => 'required|min:3|max:200',
-            'cpf' => 'required|digits:11|numeric|unique:users,cpf,'.$this->id, // Numero de CPF unico no banco de dados.
+            'gender' => 'required',
+            'cpf' => ['required', 'numeric', 'digits:11', 'unique:users,cpf,.$this->id', new ValidateCpf],
             'birth_date' => 'required|date_format:"Y-m-d"',
-            'email' => 'email', // Não obrigatório
+            'email' => 'email|required',
             'phone' => 'required|numeric|digits_between:8,30',
             'address' => 'required|max:200',
             'city' => 'required|max:50',
-            'state' => 'required', // |between:2,2
+            'state' => 'required',
         ];
     }
 
@@ -51,11 +53,13 @@ class StoreUserRequest extends FormRequest
             'name.required' => 'Por favor, nos informe seu nome.',
             'name.min' => 'Por favor, digite seu nome completo.',
             'name.max' => 'Por favor, verifique seu nome.',
+            'gender.required' => 'Por favor, nos informe seu gênero.',
             'cpf.required' => 'Por favor, nos informe seu CPF.',
             'cpf.digits' => 'Por favor, o CPF precisa ter 11 dígitos no total.',
-            'cpf.unique' => 'CPF já cadastrado em nosso Banco. Verifique e tente novamente.',
+            'cpf.unique' => 'CPF já cadastrado. Verifique e tente novamente.',
             'cpf.numeric' => 'Por favor, o CPF deve conter apenas números.',
             'email.email' => 'Por favor, digite um E-mail valido.',
+            'email.required' => 'Por favor, nos informe seu E-mail.',
             'birth_date.required' => 'Por favor, nos informe sua data de nascimento.',
             'birth_date.date_format' => 'Por favor, use o formato de data: ano-mes-dia',
             'phone.required' => 'Por favor, digite o numero do seu Telefone.',
@@ -70,8 +74,8 @@ class StoreUserRequest extends FormRequest
 
     // Subescrevendo uma funçao do Laravel para trazer as mensagens de error.
     // Sem fazer isso, o metodo validated() retorna para a pagina anterior, como diz na documentação.
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json($validator->errors(), 422));
-    }
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(response()->json($validator->errors(), 422));
+    // }
 }

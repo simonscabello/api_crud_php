@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 200);
+            $table->string('gender', 2);
             $table->char('cpf', 11);
             $table->date('birth_date');
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->string('phone', 20);
             $table->string('address', 200);
             $table->string('city');
