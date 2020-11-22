@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('app')
+
+@section('shortcuticon')
+<link rel="shortcut icon" href="{{ asset('icons\ww.png') }}">
 
 @section('title', 'Cadastro de Usuários')
 
@@ -6,6 +9,7 @@
 <header>
     <h1>Cadastro de Usuários</h1>
 </header>
+
 
 @section('formulario')
     @if ($errors)
@@ -18,9 +22,9 @@
         </ul>
     @endif
     @if ($message_user ?? '')
-        <div class="alert alert-success" role="alert">{{$message_user}} <a class="btn btn-info" href="/lista">Ver usuários</a></div>
+        <div class="alert alert-success" role="alert">{{$message_user}} <a class="btn btn-info" href="listusers">Ver usuários</a></div>
     @endif
-    <form action="/cadastro" method="POST">
+    <form action="/createusers" method="POST">
     @csrf
         <div class="form-group">
             <label for="name">Nome</label>

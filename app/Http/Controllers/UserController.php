@@ -8,60 +8,55 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    // Função para listar todos os usuários.
     public function fetchAll() 
     {
         $users = User::all();
     
-        return view('layouts/lista', compact('users'));
+        return view('listusers', compact('users'));
     }
 
-    // Função para criar usuários.
+    
     public function createUser(StoreUserRequest $request) // 
     {   
         User::create($request->all());
-        //return response()->json(['user' => $new_user], 201); API
-        return view('layouts/cadastro', ['message_user' => 'Usuário cadastrado com sucesso!']);
+       
+        return view('createusers', ['message_user' => 'Usuário cadastrado com sucesso!']);
     }
 
-    // Função para buscar usuários pelo ID - 1
+
     public function getUserById($id) 
     {
-        $user = User::find($id);
-        return view('layouts/editar', ['users' => $user]);
+        $users = User::find($id);
+
+        return view('editusers', ['users' => $users]);
     }
 
-    // Função para buscar usuários pelo CPF
     public function getUserByCpf($cpf)
     {
-        $get_user_cpf = DB::table('users')->where('cpf', $cpf)->first(); // Pegando o cpf no banco
+        $get_user_cpf = DB::table('users')->where('cpf', $cpf)->first(); 
     
         if(is_null($get_user_cpf)) {
-            return response()->json(['message' => 'Usuário não encontrado.']); // Verificando se o CPF está cadastrado 
+            return response()->json(['message' => 'Usuário não encontrado.']); 
         }
 
         return response()->json(['user' => $get_user_cpf]);
     }
 
-    // Função para editar os atributos do usuário
     public function updateUser(StoreUserRequest $request, $id)
     {    
-        $users = User::find($id); // Buscando o ID cadastrado.
+        $users = User::find($id);
         
-        $users->update($request->all()); // Atualizando dados
+        $users->update($request->all());
         
-        $users = User::all();
-
-        return redirect()->route('lista');
+        return redirect()->route('listusers');
     } 
-        
-    // Função para deletar usuário
+
     public function deleteUser($id)
     {
-        $user = User::find($id);
-        
-        $user->destroy();
+        $users = User::find($id);
 
-        return redirect()->route('lista');
+        $users->delete();
+
+        return redirect()->route('listusers');
     }
 }

@@ -15,20 +15,20 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('layouts/index');
+    return view('index');
 });
 
-Route::get('/cadastro', function () {
-    return view('layouts/cadastro');
+Route::get('/createusers', function () {
+    return view('createusers');
 });
 
-Route::get('/lista', function () {
-    return view('layouts/lista');
+Route::get('/listusers', function () {
+    return view('listusers');
 });
 
 
-Route::get('/lista', [UserController::class, 'fetchAll'])->name('lista');
+Route::get('/listusers', [UserController::class, 'fetchAll'])->name('listusers');
 Route::get('/user/{id}', [UserController::class, 'getUserById']);
-Route::post('/cadastro', [UserController::class, 'createUser']); // Criar um usuario
+Route::get('/user/delete/{id}', [UserController::class, 'deleteUser']);
+Route::post('/createusers', [UserController::class, 'createUser']);
 Route::put('/{id}', [UserController::class, 'updateUser']);
-Route::delete('/user/delete/{id}', [UserController::class, 'deleteUser']);
