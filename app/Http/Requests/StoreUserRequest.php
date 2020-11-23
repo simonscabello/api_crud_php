@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 Use App\Rules\ValidateCpf;
 
 // Classe para validação dos dados. Está sendo usada na funçao createUser() e na updateUser().
@@ -28,14 +26,13 @@ class StoreUserRequest extends FormRequest
      */
 
 
-    // Funçao para verificar se as regras estao sendo observadas.
     public function rules()
     {
         return 
         [
             'name' => 'required|min:3|max:200',
             'gender' => 'required',
-            'cpf' => ['required', 'numeric', 'digits:11', 'unique:users,cpf,.$this->id', new ValidateCpf],
+            'cpf' => ['required', 'numeric', 'digits:11', 'unique:users,cpf,'.$this->id, new ValidateCpf],
             'birth_date' => 'required|date_format:"Y-m-d"',
             'email' => 'email|required',
             'phone' => 'required|numeric|digits_between:8,30',
@@ -45,7 +42,7 @@ class StoreUserRequest extends FormRequest
         ];
     }
 
-    // Funçao para trazer mensagens de error personalizadas.
+    
     public function messages()
     {
         return 

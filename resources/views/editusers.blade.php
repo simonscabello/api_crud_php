@@ -29,7 +29,7 @@
     @csrf
         <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control w-100 p-3 @error('name') is-invalid @enderror" id="name" name="name" placeholder="{{$users['name']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('name') is-invalid @enderror" id="name" name="name" value="{{$users['name']}}" required>
         </div>
         <div class="form-group">
             <label for="gender">Sexo</label>
@@ -42,28 +42,28 @@
         </div>
         <div class="form-group">
             <label for="cpf">C.P.F.</label>
-            <input type="text" class="form-control w-100 p-3 @error('cpf') is-invalid @enderror" id="cpf"  name="cpf" placeholder="{{$users['cpf']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('cpf') is-invalid @enderror" id="cpf"  name="cpf" value="{{$users['cpf']}}" required>
         </div>
         <div class="form-group">
             <label for="birth_date">Data de nascimento</label>
-            <input type="text" class="form-control w-100 p-3 @error('birth_date') is-invalid @enderror" id="birth_date"  name="birth_date" placeholder="{{$users['birth_date']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('birth_date') is-invalid @enderror" id="birth_date"  name="birth_date" value="{{$users['birth_date']}}" required>
         </div>
         <div class="form-group"> 
             <label for="email">E-mail</label>
-            <input type="email" class="form-control w-100 p-3 @error('email') is-invalid @enderror" id="email" name="email" placeholder="{{$users['email']}}">
+            <input type="email" class="form-control w-100 p-3 @error('email') is-invalid @enderror" id="email" name="email" value="{{$users['email']}}">
             <small id="emailHelp" class="form-text text-muted">Nós nunca iremos compartilhar seu e-mail com ninguém.</small>
         </div>
         <div class="form-group">
             <label for="phone">Telefone de Contato</label>
-            <input type="text" class="form-control w-100 p-3 @error('phone') is-invalid @enderror" id="phone"  name="phone" placeholder="{{$users['phone']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('phone') is-invalid @enderror" id="phone"  name="phone" value="{{$users['phone']}}" required>
         </div>
         <div class="form-group">
             <label for="address">Endereço</label>
-            <input type="text" class="form-control w-100 p-3 @error('address') is-invalid @enderror" id="address" name="address" placeholder="{{$users['address']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('address') is-invalid @enderror" id="address" name="address" value="{{$users['address']}}" required>
         </div>
         <div class="form-group">
             <label for="city">Cidade</label>
-            <input type="text" class="form-control w-100 p-3 @error('city') is-invalid @enderror" id="city" name="city" placeholder="{{$users['city']}}" required>
+            <input type="text" class="form-control w-100 p-3 @error('city') is-invalid @enderror" id="city" name="city" value="{{$users['city']}}" required>
         </div>
         <div class="form-group">
             <label for="state">Estado</label>

@@ -29,6 +29,6 @@ Route::get('/listusers', function () {
 
 Route::get('/listusers', [UserController::class, 'fetchAll'])->name('listusers');
 Route::get('/user/{id}', [UserController::class, 'getUserById']);
-Route::get('/user/delete/{id}', [UserController::class, 'deleteUser']);
+Route::delete('/user/{id}', [UserController::class, 'deleteUser']);
 Route::post('/createusers', [UserController::class, 'createUser']);
 Route::put('/{id}', [UserController::class, 'updateUser']);

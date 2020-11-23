@@ -40,13 +40,9 @@
 
         td:last-child {
           padding: 10px;
-          display: inline-block;
+          display: flex;
+          justify-content: space-between;
         }
-
-        td a{
-          margin-bottom: 3px;
-        }
-
 
     </style>
 </head>
@@ -89,13 +85,13 @@
           <td>
             <!-- <a class="btn btn-info" href="#">Visualizar</a> -->
             <a class="btn btn-warning" href="/user/{{$user->id}}">Editar</a>
-            <a class="btn btn-danger" href="/user/delete/{{$user->id}}">Deletar</a>   
+            <button type="submit" class="btn btn-danger" form="submitdelete">Deletar</button>
           </td>
         </tr>
+        <form action="/user/{{$user->id}}" method="post" id="submitdelete">@csrf @method('delete')</form>
         @endforeach
       </tbody>
     </table>
     </div>
-    
 </body>
 </html>
