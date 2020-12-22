@@ -12,6 +12,9 @@
 
 
 @section('formulario')
+
+<script src="{{asset('js/mask.js')}}"></script>
+
     @if ($errors)
         <ul class="list-group">
             @foreach ($errors->all() as $error)
@@ -28,7 +31,14 @@
     @csrf
         <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control w-100 p-3 @error('name') is-invalid @enderror" id="name" name="name" placeholder="Informe seu nome completo." required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('name') is-invalid @enderror" 
+            id="name" 
+            name="name" 
+            placeholder="Informe seu nome completo." 
+            value="{{old('name')}}"
+            required>
         </div>
         <div class="form-group">
             <label for="gender">Sexo</label>
@@ -41,28 +51,74 @@
         </div>
         <div class="form-group">
             <label for="cpf">C.P.F.</label>
-            <input type="text" class="form-control w-100 p-3 @error('cpf') is-invalid @enderror" id="cpf"  name="cpf" placeholder="Informe apenas os números." required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('cpf') is-invalid @enderror" 
+            id="cpf"  
+            name="cpf" 
+            onkeyup="maskCpf();" 
+            maxlength="14" 
+            placeholder="Informe seu CPF." 
+            value="{{old('cpf')}}"
+            required>
         </div>
         <div class="form-group">
             <label for="birth_date">Data de nascimento</label>
-            <input type="text" class="form-control w-100 p-3 @error('birth_date') is-invalid @enderror" id="birth_date"  name="birth_date" placeholder="Exemplo: 1990-05-22" required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('birth_date') is-invalid @enderror" 
+            id="birth_date"  
+            name="birth_date" 
+            placeholder="00/00/0000" 
+            onkeyup="maskDate();"
+            value="{{old('birth_date')}}"
+            required>
         </div>
         <div class="form-group"> 
             <label for="email">E-mail</label>
-            <input type="email" class="form-control w-100 p-3 @error('email') is-invalid @enderror" id="email" name="email" placeholder="fulano@gmail.com">
+            <input 
+            type="email" 
+            class="form-control w-100 p-3 @error('email') is-invalid @enderror" 
+            id="email" 
+            name="email" 
+            placeholder="fulano@gmail.com"
+            value="{{old('email')}}"
+            required>
             <small id="emailHelp" class="form-text text-muted">Nós nunca iremos compartilhar seu e-mail com ninguém.</small>
         </div>
         <div class="form-group">
             <label for="phone">Telefone de Contato</label>
-            <input type="text" class="form-control w-100 p-3 @error('phone') is-invalid @enderror" id="phone"  name="phone" placeholder="Informe apenas o número junto ao DDD." required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('phone') is-invalid @enderror" 
+            id="phone"  
+            name="phone"
+            onkeyup="maskPhone();" 
+            placeholder="(00) 00000-0000" 
+            value="{{old('phone')}}"
+            required>
         </div>
         <div class="form-group">
             <label for="address">Endereço</label>
-            <input type="text" class="form-control w-100 p-3 @error('address') is-invalid @enderror" id="address" name="address" placeholder="Informe seu endereço. Rua e Número." required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('address') is-invalid @enderror" 
+            id="address" 
+            name="address" 
+            placeholder="Informe seu endereço. Rua e Número." 
+            value="{{old('address')}}"
+            required>
         </div>
         <div class="form-group">
             <label for="city">Cidade</label>
-            <input type="text" class="form-control w-100 p-3 @error('city') is-invalid @enderror" id="city" name="city" placeholder="Informe sua cidade." required>
+            <input 
+            type="text" 
+            class="form-control w-100 p-3 @error('city') is-invalid @enderror" 
+            id="city" 
+            name="city" 
+            placeholder="Informe sua cidade." 
+            value="{{old('city')}}"
+            required>
         </div>
         <div class="form-group">
             <label for="state">Estado</label>
@@ -98,6 +154,6 @@
 
             </select> 
         </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="submit" class="btn btn-primary" onclick="removeMaskCpf();removeMaskDate();removeMaskPhone();">Cadastrar</button>
     </form>
 @endsection

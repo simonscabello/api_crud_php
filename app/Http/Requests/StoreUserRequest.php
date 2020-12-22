@@ -27,12 +27,12 @@ class StoreUserRequest extends FormRequest
 
 
     public function rules()
-    {
+    {   
         return 
         [
             'name' => 'required|min:3|max:200',
             'gender' => 'required',
-            'cpf' => ['required', 'numeric', 'digits:11', 'unique:users,cpf,'.$this->id, new ValidateCpf],
+            'cpf' => ['required', 'unique:users,cpf,'.$this->id, new ValidateCpf],
             'birth_date' => 'required|date_format:"Y-m-d"',
             'email' => 'email|required',
             'phone' => 'required|numeric|digits_between:8,30',

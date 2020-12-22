@@ -45,7 +45,7 @@ class UserController extends Controller
     public function updateUser(StoreUserRequest $request, $id)
     {    
         $users = User::find($id);
-        
+
         $users->update($request->all());
         
         return redirect()->route('listusers');
